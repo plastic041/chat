@@ -1,8 +1,7 @@
-import { SignedIn, SignedOut, SignIn, UserButton } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
 import Head from "next/head";
 import { Header } from "~/components/header";
-import { TodoListContainer } from "~/components/todo-list";
-import { prisma } from "~/lib/prisma";
+import { PingsContainer } from "~/components/pings";
 
 export default function Home() {
   return (
@@ -13,12 +12,9 @@ export default function Home() {
       </Head>
 
       <Header />
-      <main className="container mx-auto p-4">
-        <SignedOut></SignedOut>
+      <main className="flex flex-col container mx-auto p-4">
         <SignedIn>
-          <div className="flex container p-4">
-            <TodoListContainer />
-          </div>
+          <PingsContainer />
         </SignedIn>
       </main>
     </>

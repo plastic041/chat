@@ -12,9 +12,9 @@ export function Header() {
   const { user } = useUser();
 
   return (
-    <header className="bg-blue-200 shadow p-4 flex flex-row justify-between">
+    <header className="bg-blue-200 shadow p-4 flex flex-row justify-between items-center">
       <span className="text-2xl font-bold">Todo App</span>
-      <div className="flex flex-row gap-2 items-end">
+      <div className="flex flex-row gap-2 items-center">
         <SignedIn>
           <UserButton />
           <span className="">{user?.username}</span>

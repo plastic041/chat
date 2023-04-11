@@ -9,11 +9,29 @@ generator client {
   output   = "../node_modules/.prisma/client"
 }
 
-model Todo {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  completed Boolean  @default(false)
-  userId    String
+model User {
+  id           String @id
+  email        String @unique
+  username     String
+  SentPings    Ping[] @relation("sender")
+  RecivedPings Ping[] @relation("reciever")
+}
+
+model Ping {
+  id       Int      @id @default(autoincrement())
+  pingedAt DateTime @default(now())
+  checked  Boolean  @default(false)
+
+  // User who pinged
+  sender         User   @relation(fields: [senderId], references: [id], name: "sender")
+  senderId       String
+  senderUsername String
+
+  // User who received ping
+  reciever         User   @relation(fields: [recieverId], references: [id], name: "reciever")
+  recieverId       String
+  recieverUsername String
+
+  @@index([senderId])
+  @@index([recieverId])
 }
